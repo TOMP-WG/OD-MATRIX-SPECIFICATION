@@ -9,9 +9,9 @@
   "value_files": [
     {
       "file_name": "example_odmatrix.odv",
-      "purpose": "ALL",
-      "mode": "ALL",
-      "aggregation_function": "COUNT",
+      "purpose": ["ALL"],
+      "mode": ["ALL"],
+      "aggregation_function": ["COUNT"],
       "aggregation_date_bucket": "ALL",
       "aggregation_time_bucket": "ALL"
     }

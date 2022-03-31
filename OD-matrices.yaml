@@ -1,0 +1,152 @@
+openapi: 3.0.0
+info:
+  title: OD matrices exchange specification
+  version: "0.1"
+  license:
+    name: Apache 2.0
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+
+paths:
+  /:
+    get:
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/odd"
+
+components:
+  schemas:
+    odd:
+      type: object
+      required:
+        - unit
+        - geography_id
+        - aggregation_period
+        - generation_date
+        - value_files
+      properties:
+        unit: 
+          type: string
+          description: unit of the values, like `trips`, `duration`. This must be repeated in the OD-values-file
+        geography_id:
+          type: string
+          description: the field in the geography specification that identifies the geography
+        aggregation_period:
+          type: object
+          required:
+           - start
+           - end
+          properties:
+            start:
+              type: string
+              format: date-time
+              description: start date-time in RFC 3339, section 5.6 (= ISO 8601) )
+            end:
+              type: string
+              format: date-time
+              description: end date-time in RFC 3339, section 5.6 (= ISO 8601) )
+        generation_date:
+          type: string
+          format: date-time
+          description: generation date-time in RFC 3339, section 5.6 (= ISO 8601) )
+        value_files:
+          type: array
+          minLength: 1
+          items: 
+            $ref: "#/components/schemas/value_file"
+        daypart_definitition:
+          type: array
+          minLength: 1
+          items:
+            $ref: "#/components/schemas/daypart_definitition"
+        
+    value_file:
+      type: object
+      required:
+        - file_name
+        - purpose
+        - mode
+        - aggregation_function
+        - aggregation_date_bucket
+        - aggregation_time_bucket
+      properties:
+        file_name:
+          type: string
+          description: the name of the value file
+        purpose:
+          type: array
+          description: the purpose for the movement, like `school`, `work`, `shopping`. 
+            Should normally contain only one value, except when using the `Advanced` option.
+            Only one dimension of the file can have multiple entries
+          minLength: 1
+          items: 
+            type: string
+            enum: [ALL,WORK, SCHOOL, SHOPPING, HOME, MULTIPLE, LEASURE, VACATION, FAMILY_VISIT, OTHER]
+        mode:
+          type: array
+          description: the mode of transport
+            Should normally contain only one value, except when using the `Advanced` option.
+            Only one dimension of the file can have multiple entries
+          minLength: 1
+          items: 
+            type: string
+            enum: [AIR,BUS,TROLLEYBUS,TRAM,COACH,RAIL,INTERCITYRAIL,URBANRAIL,METRO,WATER,CABLEWAY,FUNICULAR,TAXI,SELFDRIVE,FOOT,BICYCLE,MOTORCYCLE,CAR,SHUTTLE,OTHER,PARKING,MOPED,STEP,ALL]
+        aggregation_function:
+          type: array
+          description: the unit of the values, like count, max, min, avg, mean, percentile85, etc.
+            Should normally contain only one value, except when using the `Advanced` option.
+            Only one dimension of the file can have multiple entries
+          minLength: 1
+          items: 
+            type: string
+            enum: [COUNT, MAX, MIN, AVG, MEAN, PERCENTILE85, PERCENTILE90, PERCENTILE95]
+        aggregation_date_bucket:
+          type: string
+          enum: [YEAR, HALF_YEAR, QUARTER, MONTH, WEEK, DAY, DAY_PER_TYPE, ALL]
+        date_bucket:
+          type: array
+          description: number representing the year, quarter, month, week etc. (>=1)
+            Should normally contain only one value, except when using the `Advanced` option.
+            Only one dimension of the file can have multiple entries
+          minLength: 1
+          items: 
+            type: number
+        aggregation_time_bucket:
+          type: string
+          description: aggregation level, like hourly, day_parts, quarters, etc.
+          enum: [HOUR, QUARTER_OF_HOUR, DAY_PART, ALL]
+        time_bucket: 
+          type: array
+          description: number representing the hour, quarter index or day_part (>=0)
+            Should normally contain only one value, except when using the `Advanced` option.
+            Only one dimension of the file can have multiple entries
+          minLength: 1
+          items: 
+            type: number
+
+    daypart_definitition:
+      type: object
+      required:
+        - time_bucket_index
+        - start
+        - end
+      properties:
+        name:
+          type: string
+          description: name of the daypart, like `morning rush hour`
+        time_bucket_index: 
+          type: number
+          description: index used in the `time_bucket` for this daypart
+        start: 
+          type: string
+          format: time
+          description: start partial-time in RFC 3339, section 5.6 (= ISO 8601) )
+        end: 
+          type: string
+          format: time
+          description: end partial-time in RFC 3339, section 5.6 (= ISO 8601) )

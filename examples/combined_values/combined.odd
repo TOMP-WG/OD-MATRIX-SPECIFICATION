@@ -9,21 +9,21 @@
   "value_files": [
     {
       "file_name": "combined-ALL-BIKE|MOPED-COUNT-ALL-DAY_PART#1.odv",
-      "purpose": "ALL",
-      "mode": "BIKE|MOPED",
-      "aggregation_function": "COUNT",
+      "purpose": ["ALL"],
+      "mode": ["BIKE","MOPED"],
+      "aggregation_function": ["COUNT"],
       "aggregation_date_bucket": "ALL",
       "aggregation_time_bucket": "DAY_PART",
-      "time_bucket": 1
+      "time_bucket": [1]
     },
     {
       "file_name": "combined-ALL-BIKE_MOPED-COUNT-ALL-DAY_PART#2.odv",
       "purpose": "ALL",
-      "mode": "BIKE|MOPED",
-      "aggregation_function": "COUNT",
+      "mode": ["BIKE","MOPED"],
+      "aggregation_function": ["COUNT"],
       "aggregation_date_bucket": "ALL",
       "aggregation_time_bucket": "DAY_PART",
-      "time_bucket": 2
+      "time_bucket": [2]
     }
   ],
   "daypart_definitition": [
