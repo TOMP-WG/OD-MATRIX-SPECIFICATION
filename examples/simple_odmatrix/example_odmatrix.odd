@@ -1,0 +1,19 @@
+{
+  "unit": "TRIPS",
+  "geography_id": "id",
+  "aggregation_period": {
+    "start": "2017-06-01T00:00:00.000",
+    "end": "2017-07-01T00:00:00.000"
+  },
+  "generation_date": "2017-07-01T03:00:00.000Z",
+  "value_files": [
+    {
+      "file_name": "example_odmatrix.odv",
+      "purpose": "ALL",
+      "mode": "ALL",
+      "aggregation_function": "COUNT",
+      "aggregation_date_bucket": "ALL",
+      "aggregation_time_bucket": "ALL"
+    }
+  ]
+}

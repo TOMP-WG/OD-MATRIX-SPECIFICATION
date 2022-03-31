@@ -1,0 +1,43 @@
+{
+  "unit": "TRIPS",
+  "geography_id": "id",
+  "aggregation_period": {
+    "start": "2017-06-01T00:00:00.000",
+    "end": "2017-07-01T00:00:00.000"
+  },
+  "generation_date": "2017-07-01T03:00:00.000Z",
+  "value_files": [
+    {
+      "file_name": "combined-ALL-BIKE|MOPED-COUNT-ALL-DAY_PART#1.odv",
+      "purpose": "ALL",
+      "mode": "BIKE|MOPED",
+      "aggregation_function": "COUNT",
+      "aggregation_date_bucket": "ALL",
+      "aggregation_time_bucket": "DAY_PART",
+      "time_bucket": 1
+    },
+    {
+      "file_name": "combined-ALL-BIKE_MOPED-COUNT-ALL-DAY_PART#2.odv",
+      "purpose": "ALL",
+      "mode": "BIKE|MOPED",
+      "aggregation_function": "COUNT",
+      "aggregation_date_bucket": "ALL",
+      "aggregation_time_bucket": "DAY_PART",
+      "time_bucket": 2
+    }
+  ],
+  "daypart_definitition": [
+    {
+      "name": "morning rush hour",
+      "time_bucket_index": 1,
+      "start": "07:00:00",
+      "end": "09:00:00"
+    },
+    {
+      "name": "evening rush hour",
+      "time_bucket_index": 2,
+      "start": "16:30:00",
+      "end": "18:30:00"
+    }
+  ]
+}
